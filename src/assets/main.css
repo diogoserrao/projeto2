@@ -1,0 +1,16 @@
+body{
+  background-color: #222;
+  color: #fff;
+}
+
+.page{
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+
+
+.movielist{
+  display: grid ;
+  grid-template-columns: 1fr 1fr 1fr;
+}
