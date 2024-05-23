@@ -3,6 +3,7 @@ import MoviesDetails from '../views/MoviesDetails.vue'
 import MoviesView from '../views/MoviesView.vue'
 import Carrinho from '../views/Carrinho.vue'
 import Login from '../views/Login.vue'
+import Register from '../views/Register.vue'
 import Pesquisa from '../views/Pesquisa.vue'
 import NotFound from '../views/NotFound.vue'
 
@@ -28,6 +29,11 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: Register
     },
     {
       path: '/pesquisa',

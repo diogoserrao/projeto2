@@ -1,42 +1,68 @@
 <template>
-    <div class="vertical-center">
-      <div v-if="!logado" class="inner-block">
-        <h3>Login</h3>
-          <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" class="form-control" v-model="username" />
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" class="form-control" v-model="password" />
-          </div>
-          <button @click="login" class="btn btn-primary">Login</button>
+  <div class="vertical-center">
+    <div v-if="!logado" class="inner-block">
+      <h3>Login</h3>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" class="form-control" v-model="email" />
       </div>
-      <div v-if="logado">estou logado
-      <button  @click="logout">logout</button>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" class="form-control" v-model="password" />
       </div>
+      <button @click="loginUser" class="btn btn-primary">Login</button>
+      <p class="mt-3 text-center">
+          Don't have an account? <RouterLink to="/Register">Sign up</RouterLink>
+        </p>
     </div>
-  </template>
-  
-<script setup>
-import { ref } from "vue";
-const logado = ref(false)
-logado.value = localStorage.getItem('login') == 'true'
-const login = () => {
-  console.log("Entrou")
-  if (username.value == 'diogo' && password.value == '12345'){
-  logado.value = true
-  localStorage.setItem("login","true")
-  }
-}
-const logout = () => {
-  console.log("saiu")
-  logado.value = false
-  localStorage.setItem("login","false")
-}
+    <div v-else>
+      <p>Estou logado</p>
+      <button @click="logout" class="btn btn-secondary">Logout</button>
+    </div>
+  </div>
+</template>
 
+<script>
+import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { auth } from '@/firebase'; // Adjust according to your project structure
 
-
+export default {
+  data() {
+    return {
+      email: "",
+      password: "",
+      logado: false, // State to track login status
+    };
+  },
+  methods: {
+    async loginUser() {
+      try {
+        await signInWithEmailAndPassword(auth, this.email, this.password);
+        this.logado = true;
+        localStorage.setItem("login", "true");
+        // Optionally redirect to the main page after successful login
+        this.$router.push('/');
+      } catch (error) {
+        console.error("Login failed: ", error.message);
+      }
+    },
+    async logout() {
+      try {
+        await signOut(auth);
+        this.logado = false;
+        localStorage.setItem("login", "false");
+        // Optionally redirect to the login page or home page after logout
+        this.$router.push('/login');
+      } catch (error) {
+        console.error("Logout failed: ", error.message);
+      }
+    },
+  },
+  mounted() {
+    // Check login status on component mount
+    this.logado = localStorage.getItem("login") === "true";
+  },
+};
 </script>
   
   <style scoped>
