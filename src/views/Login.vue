@@ -34,6 +34,9 @@ const logout = () => {
   logado.value = false
   localStorage.setItem("login","false")
 }
+
+
+
 </script>
   
   <style scoped>

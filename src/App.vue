@@ -9,7 +9,7 @@ import { RouterLink, RouterView } from 'vue-router'
     <div class="cabecalho">
     <div class="categorias">
       <RouterLink to="/" class="Inicio">Inicio</RouterLink>
-      <div>Series</div>
+      <RouterLink to="/pesquisa" class="Inicio">Pesquisar</RouterLink>
       <nav>
         <div>Filmes</div>
       </nav>

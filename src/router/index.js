@@ -3,6 +3,7 @@ import MoviesDetails from '../views/MoviesDetails.vue'
 import MoviesView from '../views/MoviesView.vue'
 import Carrinho from '../views/Carrinho.vue'
 import Login from '../views/Login.vue'
+import Pesquisa from '../views/Pesquisa.vue'
 import NotFound from '../views/NotFound.vue'
 
 const router = createRouter({
@@ -27,6 +28,11 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/pesquisa',
+      name: 'pesquisa',
+      component: Pesquisa
     },
     {
       path: '/:pathMatch(.*)*',
